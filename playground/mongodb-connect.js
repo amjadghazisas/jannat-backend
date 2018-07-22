@@ -83,3 +83,60 @@ module.exports.fetch = (con, collectionName,queryObj) => {
     _closeConnection(con.client);
  
  };
+
+ module.exports.deleteManyDocuments = (con, collectionName, queryObj) => {
+
+    if(!queryObj){
+        return;
+    }
+
+    con.db.collection(collectionName).deleteMany(queryObj).then((result) => {
+
+        console.log(result);
+
+    }, (err) => {
+ 
+        console.log("Failed To Delete "+err);
+    });
+
+    _closeConnection(con.client);
+ 
+ };
+
+ module.exports.deleteOneDocument = (con, collectionName, queryObj) => {
+
+    if(!queryObj){
+        return;
+    }
+
+    con.db.collection(collectionName).deleteOne(queryObj).then((result) => {
+
+        console.log(result);
+
+    }, (err) => {
+ 
+        console.log("Failed To Delete "+err);
+    });
+
+    _closeConnection(con.client);
+ 
+ };
+
+ module.exports.findOneDocumentAndDelete = (con, collectionName, queryObj) => {
+
+    if(!queryObj){
+        return;
+    }
+
+    con.db.collection(collectionName).findOneAndDelete(queryObj).then((result) => {
+
+        console.log(result.value); //object that was deleted is provided here
+
+    }, (err) => {
+ 
+        console.log("Failed To Delete "+err);
+    });
+
+    _closeConnection(con.client);
+ 
+ };
